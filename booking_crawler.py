@@ -34,11 +34,13 @@ class City():
         hotels = [];
 
         for i in hotelcodes:
-            name = i.split('"')[2][10:].split('.')[0];
-            country = i.split('/')[2];
-            
-            hotels.append(Hotel(name,self,country));
+            code = get_text_between(i,'href="/hotel/','.en-gb.html?');
+            country,name = code.split('/');            
 
+            try:
+                hotels.append(Hotel(name,self,country));
+            except:
+                print('Hotelcreation failed');
         return hotels;
 
 class Hotel():
@@ -56,7 +58,7 @@ class Hotel():
         actual_page = hotelpage.split('hp_hotel_name')[1];
 
         try:
-            stars = int(get_text_between(actual_page,'title="',' star hotel"'))
+            stars = int(get_text_between(actual_page,'title="','-star hotel"'))
         except ValueError: #Sometimes the stars are estimated
             stars = 0;
 

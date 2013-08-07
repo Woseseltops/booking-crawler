@@ -10,6 +10,7 @@ for language in ['nl','fr','de','es','en']:
 
     #Go through all the cities in the list
     for city in cities:
+
         city = b.City(city.strip());
         hotels = city.get_hotels();
 
@@ -30,5 +31,5 @@ for language in ['nl','fr','de','es','en']:
                     else:
                         continue;
             else:
-                print('Wrong stars')
+                print('Wrong stars',hotel.name,hotel.stars)
                 continue;
